@@ -7,21 +7,21 @@ package com.basic.datasource.array;
 public class Main {
 
     public static void main(String[] args) {
-        DynamicArray<String> dynamicArray = new DynamicArray();
-        dynamicArray.display();
+        UnorderedArray<String> unorderedArray = new UnorderedArray();
+        unorderedArray.display();
         System.out.println("-------");
-        dynamicArray.add("1");
-        dynamicArray.add("2");
+        unorderedArray.add("1");
+        unorderedArray.add("2");
         System.out.println("-------");
-        dynamicArray.display();
-        dynamicArray.add("3");
-        dynamicArray.add("4");
-        dynamicArray.add("5",1);
-        dynamicArray.add("6");
+        unorderedArray.display();
+        unorderedArray.add("3");
+        unorderedArray.add("4");
+        unorderedArray.add("5",1);
+        unorderedArray.add("6");
         System.out.println("-------");
-        dynamicArray.display();
+        unorderedArray.display();
         System.out.println("-------");
-        System.out.println(dynamicArray.indexOf("3"));
+        System.out.println(unorderedArray.indexOf("3"));
 
     }
 }

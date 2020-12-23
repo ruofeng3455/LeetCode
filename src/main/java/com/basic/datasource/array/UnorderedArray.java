@@ -8,19 +8,19 @@ import com.basic.datasource.AbstractList;
  * @create 2020-12-22 18:50
  * 一个可以动态扩容的数组集合
  */
-public class DynamicArray<E> extends AbstractList<E> {
+public class UnorderedArray<E> extends AbstractList<E> {
 
     // 数据
-    private E[] elements;
+    protected E[] elements;
 
     // 默认长度
     private static final int DEFAULT_SIZE = 4;
 
-    public DynamicArray(int capacity) {
+    public UnorderedArray(int capacity) {
         elements = (E[]) new Object[capacity];
     }
 
-    public DynamicArray() {
+    public UnorderedArray() {
         this(DEFAULT_SIZE);
     }
 
@@ -111,7 +111,7 @@ public class DynamicArray<E> extends AbstractList<E> {
      * 不够时动态扩容
      * @param capacity 保证有的容量
      * */
-    private void ensureCapacity(int capacity){
+    protected void ensureCapacity(int capacity){
         if (elements.length >= capacity) return;
         // 不够则扩容为2倍，主要都是2的倍数
         E[] newElements = (E[]) new Object[elements.length << 1];
