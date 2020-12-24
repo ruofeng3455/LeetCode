@@ -125,6 +125,7 @@ public class UnorderedArray<E> extends AbstractList<E> {
     /**
      * 展示所有
      * */
+    @Override
     public void display(){
         for (int i = 0; i < size; i++){
             System.out.println(elements[i]);

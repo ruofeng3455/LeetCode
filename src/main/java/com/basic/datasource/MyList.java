@@ -65,6 +65,8 @@ public interface MyList<E> {
      * */
     void clearAll();
 
+    void display();
+
 
 
 }
