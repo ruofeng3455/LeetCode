@@ -6,12 +6,16 @@ import lombok.Data;
 
 /**
  * @author guo.feng
- * @create 2020-12-24 22:09
- * 不使用哨兵模式
+ * @create 2020-12-24 23:06
+ * 哨兵模式，增加虚拟头节点的
  */
-public class HeadLinkList<E> extends AbstractList<E> {
+public class VirtualLinkList<E> extends AbstractList<E> {
 
     private Node<E> head;
+
+    public VirtualLinkList() {
+        head = new Node<E>(null, null);
+    }
 
     @Override
     /**
@@ -26,7 +30,7 @@ public class HeadLinkList<E> extends AbstractList<E> {
      * */
     private Node<E> nodeAtIndex(int index){
         rangeCheck(index);
-        Node<E> tmp = head;
+        Node<E> tmp = head.next;
         for (int i = 0; i < index; i ++){
             tmp = tmp.next;
         }
@@ -44,19 +48,15 @@ public class HeadLinkList<E> extends AbstractList<E> {
     @Override
     public void add(E element, int index) {
         rangeCheckForAdd(index);
-        if (index == 0){
-            head = new Node<E>(element, head);
-        }else {
-            Node<E> pre =  nodeAtIndex(index - 1);
-            pre.next = new Node<E>(element, pre.next);
-        }
+        Node<E> pre = (index == 0 ? head : nodeAtIndex(index));
+        pre.next = new Node<E>(element, pre.next);
         size ++;
     }
 
     @Override
     public int remove(int index) {
         rangeCheck(index);
-        Node<E> nodePre = nodeAtIndex(index - 1);
+        Node<E> nodePre = index == 0 ? head : nodeAtIndex(index - 1);
         Node<E> nodeNext = nodePre.next.next;
         nodePre.next = nodeNext;
         size --;
@@ -89,10 +89,7 @@ public class HeadLinkList<E> extends AbstractList<E> {
 
     @Override
     public int indexOf(E element) {
-        if (isEmpty()){
-            return ELEMENT_NPT_FOUND;
-        }
-        Node<E> tmp = head;
+        Node<E> tmp = head.next;
         for (int i = 0; i < size; i ++){
             if (tmp.data.equals(element)){
                 return i;
@@ -104,9 +101,9 @@ public class HeadLinkList<E> extends AbstractList<E> {
 
     @Override
     public void clearAll() {
-       if (size > 0){
-           head.next = null;
-       }
+        if (size > 0){
+            head.next = null;
+        }
     }
 
     @Override
@@ -129,9 +126,5 @@ public class HeadLinkList<E> extends AbstractList<E> {
         private E data;
         private Node<E> next;
 
-//        public Node(E data, Node<E> next) {
-//            this.data = data;
-//            this.next = next;
-//        }
     }
 }
